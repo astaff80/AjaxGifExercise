@@ -6,13 +6,15 @@ const search = document.querySelector("#search");
 
 const list = document.querySelector("ul");
 
+const button = document.querySelector(".clear");
+
 let r;
 
 async function getGif() {
 	const response = await axios.get(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=U6twQG3Dn8yEUhICN1IjBOR27BIDrQUc`);
 	console.log(response);
 	console.log(response.data.data[0]);
-	const GIFurl = response.data.data[0].source;
+	const GIFurl = response.data.data[0].embed_url;
 
 	const newitem = document.createElement("li");
 	const newdiv = document.createElement("div");
@@ -37,7 +39,9 @@ form.addEventListener("submit", function(event){
 	form.reset();
 })
 
-document.addEventListener(".clear", function(event){
-	console.log("b");
-	for(n of list.children) { list.removeChild(n) }
+button.addEventListener("click", function(event){
+	const k = list.childElementCount;
+	for(i=0;i<=k;i++){
+		for(n of list.children) { list.removeChild(n) }
+	}
 })
